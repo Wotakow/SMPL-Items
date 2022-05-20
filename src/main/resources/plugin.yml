@@ -1,0 +1,10 @@
+name: SMPLItems
+version: '${project.version}'
+main: org.astemir.smpl.SMPLItems
+api-version: 1.18
+authors: [ Astemir ]
+description: New items for server.
+commands:
+  itemgive:
+    permission: op
+    permission-message: "§cYou dont have permission to do this."
