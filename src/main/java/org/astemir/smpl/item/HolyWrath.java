@@ -1,6 +1,7 @@
 package org.astemir.smpl.item;
 
 import net.md_5.bungee.api.ChatColor;
+import org.astemir.smpl.SMPLItems;
 import org.astemir.smpl.event.IShotEventListener;
 import org.astemir.smpl.graphics.ItemModel;
 import org.astemir.smpl.utils.EntityHandler;
@@ -27,7 +28,6 @@ public class HolyWrath extends Item implements IShotEventListener {
     private void spreadArrows(AbstractArrow arrow,float power,boolean spectral){
         for (int i = 0; i < 360; i+=30) {
             AbstractArrow smallFire = arrow.getWorld().spawnArrow(arrow.getLocation(), new Vector(Math.cos(i), 1, Math.sin(i)), power, 0);
-            EntityUtils.setArrowLife(smallFire, 1150);
             smallFire.setFireTicks(99999);
             EntityHandler.getInstance().watchEntity(new EntityHandler.EntityRunnable(smallFire) {
                 @Override
@@ -40,7 +40,7 @@ public class HolyWrath extends Item implements IShotEventListener {
                         smallFire.remove();
                     }
                 }
-            });
+            }).lifespan(50);
         }
     }
 
@@ -66,7 +66,6 @@ public class HolyWrath extends Item implements IShotEventListener {
             AbstractArrow arrow = EntityUtils.shootArrow(e.getEntity(), e.getArrowItem(), 1, e.getForce(), 0, true);
             arrow.setPierceLevel(2);
             arrow.setPickupStatus(AbstractArrow.PickupStatus.CREATIVE_ONLY);
-            EntityUtils.setArrowLife(arrow,1150);
             EntityHandler.getInstance().watchEntity(new EntityHandler.EntityRunnable(arrow) {
                 int k = 0;
                 @Override
@@ -98,7 +97,7 @@ public class HolyWrath extends Item implements IShotEventListener {
                         }
                     }
                 }
-            });
+            }).lifespan(50);
             e.setCancelled(true);
         }
     }

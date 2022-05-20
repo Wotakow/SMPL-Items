@@ -60,6 +60,10 @@ public final class SMPLItems extends JavaPlugin {
         return plugin;
     }
 
+    public long getTicks() {
+        return ticks;
+    }
+
     @Override
     public void onDisable() {
     }

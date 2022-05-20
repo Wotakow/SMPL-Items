@@ -1,6 +1,7 @@
 package org.astemir.smpl.item;
 
 import net.md_5.bungee.api.ChatColor;
+import org.astemir.smpl.SMPLItems;
 import org.astemir.smpl.event.IShotEventListener;
 import org.astemir.smpl.graphics.ItemModel;
 import org.astemir.smpl.utils.EntityHandler;
@@ -46,7 +47,6 @@ public class MultiplexCrossbow extends Item implements IShotEventListener {
                 if (i != 0){
                     arrow.setPickupStatus(AbstractArrow.PickupStatus.CREATIVE_ONLY);
                 }
-                EntityUtils.setArrowLife(arrow,1000);
                 arrow.setVelocity(arrow.getVelocity().clone().add(randomVec));
                 EntityHandler.getInstance().watchEntity(new EntityHandler.EntityRunnable(arrow){
                     @Override
@@ -55,7 +55,7 @@ public class MultiplexCrossbow extends Item implements IShotEventListener {
                             entity.getWorld().spawnParticle(Particle.LAVA, entity.getLocation().getX(), entity.getLocation().getY(), entity.getLocation().getZ(), 0, 0, 0, 0);
                         }
                     }
-                });
+                }).lifespan(100);
             }else
             if (projectile instanceof Firework){
                 Firework firework = EntityUtils.shootFirework(e.getEntity(),e.getArrowItem(),e.getForce(),1);

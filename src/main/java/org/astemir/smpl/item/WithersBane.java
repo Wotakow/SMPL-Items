@@ -1,8 +1,6 @@
 package org.astemir.smpl.item;
 
 import net.md_5.bungee.api.ChatColor;
-import org.astemir.smpl.event.ITickEventListener;
-import org.astemir.smpl.event.PlayerTickEvent;
 import org.astemir.smpl.graphics.ItemModel;
 import org.astemir.smpl.utils.BeamUtils;
 import org.astemir.smpl.utils.PlayerUtils;
@@ -16,8 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class WithersBane extends ItemCustomSword{
 

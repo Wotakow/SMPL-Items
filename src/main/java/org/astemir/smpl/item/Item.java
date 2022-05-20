@@ -10,7 +10,7 @@ import net.minecraft.nbt.Tag;
 import org.astemir.smpl.event.PlayerClickEvent;
 import org.astemir.smpl.graphics.ItemModel;
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_18_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_18_R2.inventory.CraftItemStack;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;

@@ -33,7 +33,6 @@ public class SentrysWrath extends Item implements IShotEventListener, ITickEvent
             e.getEntity().getWorld().playSound(e.getEntity().getLocation(), Sound.ITEM_CROSSBOW_SHOOT, 1, 0.5f);
             AbstractArrow arrow = EntityUtils.shootArrow(e.getEntity(), e.getArrowItem(), 1, e.getForce(), 0, true);
             arrow.setPickupStatus(AbstractArrow.PickupStatus.CREATIVE_ONLY);
-            EntityUtils.setArrowLife(arrow, 1150);
             arrow.setGravity(false);
             arrow.setPierceLevel(120);
             arrow.setVelocity(arrow.getVelocity().clone().multiply(0.1f));
@@ -98,7 +97,7 @@ public class SentrysWrath extends Item implements IShotEventListener, ITickEvent
 
 
                 }
-            });
+            }).lifespan(100);
             e.setCancelled(true);
         }
     }

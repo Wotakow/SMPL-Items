@@ -30,7 +30,17 @@ public class EntityHandler {
                 runnable.runOut(runnable.getEntity(),ticks);
                 handledEntities.remove(runnable);
             }else {
-                runnable.run(runnable.getEntity(),ticks);
+                if (runnable.getEndLife() == -1) {
+                    runnable.run(runnable.getEntity(), ticks);
+                }else{
+                    if (ticks < runnable.getEndLife()){
+                        runnable.run(runnable.getEntity(), ticks);
+                    }else{
+                        runnable.runOut(runnable.getEntity(),ticks);
+                        runnable.getEntity().remove();
+                        handledEntities.remove(runnable);
+                    }
+                }
             }
         }
     }
@@ -39,6 +49,7 @@ public class EntityHandler {
 
         private Entity entity;
         private boolean cancelled = false;
+        private long endLife = -1;
 
         public EntityRunnable(Entity entity) {
             this.entity = entity;
@@ -60,5 +71,14 @@ public class EntityHandler {
 
         public abstract void run(Entity entity, long ticks);
 
+
+        public long getEndLife() {
+            return endLife;
+        }
+
+        public EntityRunnable lifespan(int life){
+            endLife = SMPLItems.getPlugin().getTicks()+life;
+            return this;
+        }
     }
 }
