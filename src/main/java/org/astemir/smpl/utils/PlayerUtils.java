@@ -1,6 +1,7 @@
 package org.astemir.smpl.utils;
 
 import org.astemir.smpl.SMPLItems;
+import org.astemir.smpl.item.Items;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -12,6 +13,12 @@ public class PlayerUtils {
 
     public static Location getPlayerEyeLocation(Player player){
         return player.getEyeLocation().clone().add(0,- 0.10000000149011612D,0);
+    }
+
+    public static org.astemir.smpl.item.Item[] getItemsInHands(Player player){
+        org.astemir.smpl.item.Item mainHand = Items.getItem(player.getInventory().getItemInMainHand());
+        org.astemir.smpl.item.Item offHand = Items.getItem(player.getInventory().getItemInOffHand());
+        return new org.astemir.smpl.item.Item[]{mainHand,offHand};
     }
 
     public static void cooldown(Player player,String name,int ticks){

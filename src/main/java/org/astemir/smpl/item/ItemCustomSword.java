@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SwordItem;
 import org.astemir.smpl.event.PlayerClickEvent;
 import org.astemir.smpl.graphics.ItemModel;
 import org.bukkit.craftbukkit.v1_18_R2.inventory.CraftItemStack;

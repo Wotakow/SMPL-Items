@@ -30,19 +30,25 @@ public class BlazingHatchet extends ItemCustomSword implements IBreakBlockEventL
     public boolean onAttackEntity(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Player) {
             Player player = (Player) e.getDamager();
+            boolean blocking = false;
+            if (e.getEntity() instanceof Player){
+                blocking = ((Player)e.getEntity()).isBlocking();
+            }
             if (!PlayerUtils.hasCooldown(player, "blazing")) {
                 PlayerUtils.cooldown(player, "blazing", 80);
-                Location loc = e.getEntity().getLocation();
-                loc.getWorld().playSound(loc, Sound.ENTITY_BLAZE_SHOOT, 1, 0.5f);
-                for (int i = 0;i<2;i++) {
-                    loc.getWorld().playSound(loc, Sound.ENTITY_FIREWORK_ROCKET_BLAST, 1, 0.5f);
-                    loc.getWorld().spawnParticle(Particle.FLAME, loc.clone().add(0,0.5f,0), 100, 0.5f, 0.5f, 0.5f, 0.1f);
-                }
-                loc.getNearbyLivingEntities(1.5f, 1, 1.5f).forEach((entity) -> {
-                    if (!entity.getUniqueId().equals(player.getUniqueId())) {
-                        blaze(player, entity);
+                if (!blocking) {
+                    Location loc = e.getEntity().getLocation();
+                    loc.getWorld().playSound(loc, Sound.ENTITY_BLAZE_SHOOT, 1, 0.5f);
+                    for (int i = 0; i < 2; i++) {
+                        loc.getWorld().playSound(loc, Sound.ENTITY_FIREWORK_ROCKET_BLAST, 1, 0.5f);
+                        loc.getWorld().spawnParticle(Particle.FLAME, loc.clone().add(0, 0.5f, 0), 100, 0.5f, 0.5f, 0.5f, 0.1f);
                     }
-                });
+                    loc.getNearbyLivingEntities(1.5f, 1, 1.5f).forEach((entity) -> {
+                        if (!entity.getUniqueId().equals(player.getUniqueId())) {
+                            blaze(player, entity);
+                        }
+                    });
+                }
             }
         }
         return super.onAttackEntity(e);

@@ -44,9 +44,7 @@ public class MultiplexCrossbow extends Item implements IShotEventListener {
             Vector randomVec = new Vector(RandomUtils.randomFloat(-0.5f, 0.5f), RandomUtils.randomFloat(-0.5f, 0.5f), RandomUtils.randomFloat(-0.5f, 0.5f));
             if (projectile instanceof AbstractArrow){
                 AbstractArrow arrow = EntityUtils.shootArrow(e.getEntity(),e.getArrowItem(),1,e.getForce(),0,true);
-                if (i != 0){
-                    arrow.setPickupStatus(AbstractArrow.PickupStatus.CREATIVE_ONLY);
-                }
+                arrow.setPickupStatus(AbstractArrow.PickupStatus.CREATIVE_ONLY);
                 arrow.setVelocity(arrow.getVelocity().clone().add(randomVec));
                 EntityHandler.getInstance().watchEntity(new EntityHandler.EntityRunnable(arrow){
                     @Override

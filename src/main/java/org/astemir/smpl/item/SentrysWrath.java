@@ -47,7 +47,7 @@ public class SentrysWrath extends Item implements IShotEventListener, ITickEvent
                         for (int i = 0; i < 5; i++) {
                             Location loc = BeamUtils.sendParticleLightning(Particle.SOUL_FIRE_FLAME, randomLoc, dir, 2, (ent) -> {
                                 if (!ent.getUniqueId().equals(player.getUniqueId())) {
-                                    ent.damage(10, player);
+                                    ent.damage(20, player);
                                     if (!PlayerUtils.hasCooldown(player, "sentrys_wrath")) {
                                         PlayerUtils.cooldown(player, "sentrys_wrath", 40);
                                         EntityUtils.explodeFirework(ent.getLocation(), 2, FireworkEffect.builder().withFlicker().withColor(Color.AQUA).build());
@@ -79,22 +79,21 @@ public class SentrysWrath extends Item implements IShotEventListener, ITickEvent
                             for (int i = 0;i<5;i++) {
                                 Location loc = BeamUtils.sendParticleLightning(Particle.SOUL_FIRE_FLAME,randomLoc , dir, 2, (ent) -> {
                                     if (!ent.getUniqueId().equals(player.getUniqueId())) {
-                                        ent.damage(10, player);
+                                        ent.damage(15, player);
                                         if (!PlayerUtils.hasCooldown(player,"sentrys_wrath")) {
                                             PlayerUtils.cooldown(player,"sentrys_wrath",40);
-                                            EntityUtils.explodeFirework(ent.getLocation(), 2, FireworkEffect.builder().withFlicker().withColor(Color.AQUA).build());
+                                            EntityUtils.explodeFirework(ent.getLocation(), 10, FireworkEffect.builder().withFlicker().withColor(Color.AQUA).build());
                                         }
                                         return true;
                                     } else {
                                         return false;
                                     }
                                 }, 6, 0.5f, false).getLoc();
-                                arrow.getLocation().getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, arrow.getLocation().clone().add(RandomUtils.randomFloat(-2f, 2f), RandomUtils.randomFloat(-2f, 2f), RandomUtils.randomFloat(-2f, 2f)), 0, 0, 0, 0);
-                                arrow.getLocation().getWorld().spawnParticle(Particle.REDSTONE, arrow.getLocation().clone().add(RandomUtils.randomFloat(-0.5f, 0.5f), RandomUtils.randomFloat(-0.5f,0.5f), RandomUtils.randomFloat(-0.5f, 0.5f)), 10, 0, 0, 0, new Particle.DustOptions(Color.AQUA,2f));
                             }
                         }
                     }
-
+                    arrow.getLocation().getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, arrow.getLocation().clone().add(RandomUtils.randomFloat(-2f, 2f), RandomUtils.randomFloat(-2f, 2f), RandomUtils.randomFloat(-2f, 2f)), 0, 0, 0, 0);
+                    arrow.getLocation().getWorld().spawnParticle(Particle.REDSTONE, arrow.getLocation().clone().add(RandomUtils.randomFloat(-0.5f, 0.5f), RandomUtils.randomFloat(-0.5f,0.5f), RandomUtils.randomFloat(-0.5f, 0.5f)), 10, 0, 0, 0, new Particle.DustOptions(Color.AQUA,2f));
 
                 }
             }).lifespan(100);

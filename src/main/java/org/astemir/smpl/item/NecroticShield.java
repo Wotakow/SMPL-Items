@@ -38,7 +38,7 @@ public class NecroticShield extends Item implements IHurtByEntityEventListener, 
         if (player.isBlocking()){
             if (e.getDamager() instanceof LivingEntity){
                 if (!((LivingEntity)e.getDamager()).hasPotionEffect(PotionEffectType.WITHER)) {
-                    ((LivingEntity) e.getDamager()).addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 150, 0, false, false));
+                    ((LivingEntity) e.getDamager()).addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 330, 0, false, false));
                 }
             }
         }

@@ -4,6 +4,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.minecraft.world.item.BowItem;
 import org.astemir.smpl.event.IShotEventListener;
 import org.astemir.smpl.graphics.ItemModel;
+import org.astemir.smpl.graphics.ParticleEffect;
 import org.astemir.smpl.utils.*;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -25,9 +26,8 @@ public class Ragnarok extends Item implements IShotEventListener {
 
     @Override
     public void onShoot(EntityShootBowEvent e) {
-        for (int i = 0;i<4;i++) {
-            e.getEntity().getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, e.getEntity().getLocation().getX()+ RandomUtils.randomFloat(-0.5f,0.5f), e.getEntity().getLocation().getY()+ 1f+RandomUtils.randomFloat(-0.5f,0.75f), e.getEntity().getLocation().getZ()+ RandomUtils.randomFloat(-0.5f,0.5f), 10, 0, 0, 0);
-        }
+        ParticleEffect effect = new ParticleEffect(Particle.SOUL_FIRE_FLAME).size(1,1,1).speed(1,1,1).randomSpeed().renderTimes(10);
+        effect.render(e.getEntity().getLocation());
         e.getEntity().getWorld().playSound(e.getEntity().getLocation(), Sound.ENTITY_BLAZE_SHOOT,0.5f,1.5f);
         e.getEntity().getWorld().playSound(e.getEntity().getLocation(), Sound.ENTITY_SKELETON_SHOOT,1,1.5f*e.getForce());
         e.getEntity().getWorld().playSound(e.getEntity().getLocation(), Sound.ITEM_CROSSBOW_SHOOT,1,1.5f*e.getForce());

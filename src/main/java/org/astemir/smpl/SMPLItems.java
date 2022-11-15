@@ -33,15 +33,24 @@ public final class SMPLItems extends JavaPlugin {
             Bukkit.getOnlinePlayers().forEach((player)->{
                 ItemStack mainHand = player.getInventory().getItemInMainHand();
                 ItemStack offHand = player.getInventory().getItemInOffHand();
+                ItemStack chestplate = player.getInventory().getChestplate();
+
                 if (Items.getItem(mainHand) != null) {
                     Item item = Items.getItem(mainHand);
                     if (item instanceof ITickEventListener) {
                         ((ITickEventListener) item).onTick(new PlayerTickEvent(player, mainHand, ticks));
                     }
-                }else if (Items.getItem(offHand) != null) {
+                }
+                if (Items.getItem(offHand) != null) {
                     Item item = Items.getItem(offHand);
                     if (item instanceof ITickEventListener) {
                         ((ITickEventListener)item).onTick(new PlayerTickEvent(player, offHand, ticks));
+                    }
+                }
+                if (Items.getItem(chestplate) != null){
+                    Item item = Items.getItem(chestplate);
+                    if (item instanceof ITickEventListener) {
+                        ((ITickEventListener)item).onTick(new PlayerTickEvent(player, chestplate, ticks));
                     }
                 }
             });

@@ -34,8 +34,11 @@ public class Daybreaker extends ItemCustomSword implements IEntityDeathEventList
 
     @Override
     public void onEntityDeath(EntityDeathEvent e) {
-        if (RandomUtils.doWithChance(25)){
+        if (RandomUtils.doWithChance(50)){
             e.getEntity().getWorld().dropItem(e.getEntity().getLocation(),new ItemStack(Material.GOLD_NUGGET,RandomUtils.randomInt(1,5)));
+        }else
+        if (RandomUtils.doWithChance(10)){
+            e.getEntity().getWorld().dropItem(e.getEntity().getLocation(),new ItemStack(Material.GOLD_INGOT,RandomUtils.randomInt(1,5)));
         }
     }
 

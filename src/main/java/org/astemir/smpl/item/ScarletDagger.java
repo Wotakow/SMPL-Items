@@ -27,7 +27,7 @@ public class ScarletDagger extends ItemCustomSword implements ITickEventListener
         if (e.getEntity() instanceof LivingEntity){
             if (RandomUtils.doWithChance(50)){
                 scarletEffect(e.getEntity().getLocation());
-                ((LivingEntity)e.getDamager()).addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION,40,0,false,false));
+                ((LivingEntity)e.getDamager()).addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION,100,1,false,false));
             }
         }
         return super.onAttackEntity(e);

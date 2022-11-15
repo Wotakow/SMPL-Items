@@ -35,7 +35,7 @@ public class WitherBlade extends ItemCustomSword {
                     world.playSound(e.getEntity().getLocation(), Sound.ENTITY_WITHER_AMBIENT, 1, 1.15f);
                     world.playSound(e.getEntity().getLocation(), Sound.ENTITY_WITHER_SHOOT, 1, 2);
                 }
-                ((LivingEntity)e.getEntity()).addPotionEffect(new PotionEffect(PotionEffectType.WITHER,150,0,false,false));
+                ((LivingEntity)e.getEntity()).addPotionEffect(new PotionEffect(PotionEffectType.WITHER,300,0,false,false));
             }
         }
         return super.onAttackEntity(e);

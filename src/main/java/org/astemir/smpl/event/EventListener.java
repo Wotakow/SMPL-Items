@@ -1,12 +1,14 @@
 package org.astemir.smpl.event;
 
 
+import net.minecraft.network.protocol.game.ClientboundLevelChunkPacketData;
+import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
+import net.minecraft.world.level.biome.Biomes;
 import org.astemir.smpl.item.Item;
 import org.astemir.smpl.item.Items;
+import org.astemir.smpl.utils.PlayerUtils;
 import org.bukkit.block.BlockFace;
-import org.bukkit.entity.Horse;
-import org.bukkit.entity.ItemFrame;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -98,19 +100,64 @@ public class EventListener implements Listener {
     }
 
     @EventHandler
+    public void onThrow(ProjectileLaunchEvent e){
+        if (e.getEntity().getShooter() != null){
+            if (e.getEntity().getShooter() instanceof Player){
+                Player player = (Player)e.getEntity().getShooter();
+                ItemStack itemStack = player.getItemInHand();
+                Item item = Items.getItem(itemStack);
+                if (item != null) {
+                    if (item instanceof IThrowEventListener){
+                        ((IThrowEventListener)item).onThrow(e);
+                    }
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onThrownHit(ProjectileHitEvent e){
+        if (e.getEntity().getShooter() != null){
+            if (e.getEntity().getShooter() instanceof Player){
+                ItemStack itemStack = null;
+                if (e.getEntity() instanceof AbstractArrow){
+                    itemStack = ((AbstractArrow)e.getEntity()).getItemStack();
+                }else
+                if (e.getEntity() instanceof ThrownPotion){
+                    itemStack = ((ThrownPotion)e.getEntity()).getItem();
+                }
+                Item item = Items.getItem(itemStack);
+                if (item != null) {
+                    if (item instanceof IThrowEventListener){
+                        ((IThrowEventListener)item).onThrownHit(e);
+                    }
+                }
+            }
+        }
+    }
+
+    @EventHandler
     public void onDamage(EntityDamageByEntityEvent e){
         if (e.getEntity() instanceof Player) {
-            ItemStack itemStack = ((Player)e.getEntity()).getItemInHand();
-            Item item = Items.getItem(itemStack);
-            if (item != null) {
-                if (item instanceof IHurtByEntityEventListener){
-                    ((IHurtByEntityEventListener)item).onHurt(e);
+            Item[] item = PlayerUtils.getItemsInHands((Player)e.getEntity());
+            if (item[0] != null) {
+                if (item[0] instanceof IHurtByEntityEventListener){
+                    ((IHurtByEntityEventListener)item[0]).onHurt(e);
+                }
+            }
+            if (item[1] != null) {
+                if (item[1] instanceof IHurtByEntityEventListener){
+                    ((IHurtByEntityEventListener)item[1]).onHurt(e);
                 }
             }
         }
 
         if (e.getDamager() instanceof Player) {
-            ItemStack itemStack = ((Player)e.getDamager()).getItemInHand();
+            ItemStack itemStack = ((Player)e.getDamager()).getItemInUse();
+            if (itemStack == null){
+                itemStack = ((Player)e.getDamager()).getItemInHand();
+            }
+            new ClientboundLevelChunkPacketData(null);
             Item item = Items.getItem(itemStack);
             if (item != null) {
                 if (item.onAttackEntity(e)) {

@@ -1,16 +1,13 @@
 package org.astemir.smpl.item;
 
-import io.papermc.paper.inventory.ItemRarity;
 import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TranslatableComponent;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.NBTTagCompound;
 import org.astemir.smpl.event.PlayerClickEvent;
 import org.astemir.smpl.graphics.ItemModel;
-import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_18_R2.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_19_R1.inventory.CraftItemStack;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -19,7 +16,6 @@ import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -103,11 +99,12 @@ public class Item {
         component.setItalic(false);
         component.setColor(getNameColor());
         component.setTranslate("item.smpl."+nameKey);
-        meta.setDisplayNameComponent(new BaseComponent[]{component});
+        meta.setDisplayNameComponents(new BaseComponent[]{component});
         meta.setCustomModelData(texture.getCustomModelData());
         if (getLore() != null) {
             meta.lore(getLore());
         }
+
         itemStack.setItemMeta(meta);
         itemStack = setStringTag(itemStack,"custom_id",nameKey);
         return itemStack;
@@ -115,66 +112,66 @@ public class Item {
 
     public static ItemStack setIntTag(ItemStack itemStack, String key, int value){
         net.minecraft.world.item.ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
-        CompoundTag tagCompound = getTag(nmsItemStack);
-        tagCompound.putInt(key,value);
-        nmsItemStack.setTag(tagCompound);
+        NBTTagCompound tagCompound = getTag(nmsItemStack);
+        tagCompound.a(key,value);
+        nmsItemStack.c(tagCompound);
         return CraftItemStack.asBukkitCopy(nmsItemStack);
     }
 
     public static ItemStack setDoubleTag(ItemStack itemStack,String key,double value){
         net.minecraft.world.item.ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
-        CompoundTag tagCompound = getTag(nmsItemStack);
-        tagCompound.putDouble(key,value);
-        nmsItemStack.setTag(tagCompound);
+        NBTTagCompound tagCompound = getTag(nmsItemStack);
+        tagCompound.a(key,value);
+        nmsItemStack.c(tagCompound);
         return CraftItemStack.asBukkitCopy(nmsItemStack);
     }
 
     public static ItemStack setStringTag(ItemStack itemStack,String key,String value){
         net.minecraft.world.item.ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
-        CompoundTag tagCompound = getTag(nmsItemStack);
+        NBTTagCompound tagCompound = getTag(nmsItemStack);
         tagCompound.putString(key,value);
         nmsItemStack.setTag(tagCompound);
         return CraftItemStack.asBukkitCopy(nmsItemStack);
     }
 
-    public static ItemStack setTag(ItemStack itemStack, String key, Tag tag){
+    public static ItemStack setTag(ItemStack itemStack, String key, NBTTagCompound tag){
         net.minecraft.world.item.ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
-        CompoundTag tagCompound = getTag(nmsItemStack);
-        tagCompound.put(key,tag);
-        nmsItemStack.setTag(tagCompound);
+        NBTTagCompound tagCompound = getTag(nmsItemStack);
+        tagCompound.a(key,tag);
+        nmsItemStack.c(tagCompound);
         return CraftItemStack.asBukkitCopy(nmsItemStack);
     }
 
     public static ItemStack removeTag(ItemStack itemStack, String key){
         net.minecraft.world.item.ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
-        CompoundTag tagCompound = getTag(nmsItemStack);
-        tagCompound.remove(key);
-        nmsItemStack.setTag(tagCompound);
+        NBTTagCompound tagCompound = getTag(nmsItemStack);
+        tagCompound.r(key);
+        nmsItemStack.c(tagCompound);
         return CraftItemStack.asBukkitCopy(nmsItemStack);
     }
 
     public static boolean hasTag(ItemStack itemStack, String key){
         net.minecraft.world.item.ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
-        CompoundTag tagCompound = getTag(nmsItemStack);
-        return tagCompound.contains(key);
+        NBTTagCompound tagCompound = getTag(nmsItemStack);
+        return tagCompound.e(key);
     }
 
-    public static String getStringTag(ItemStack itemStack,String key){
+    public static String lTag(ItemStack itemStack,String key){
         net.minecraft.world.item.ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
-        CompoundTag tagCompound = getTag(nmsItemStack);
+        NBTTagCompound tagCompound = getTag(nmsItemStack);
         if (tagCompound != null){
-            if (tagCompound.getString(key) != null){
-                return tagCompound.getString(key);
+            if (tagCompound.l(key) != null){
+                return tagCompound.l(key);
             }
         }
         return null;
     }
 
-    public static CompoundTag getTag(net.minecraft.world.item.ItemStack stack){
-        if (stack.getTag() == null){
-            return new CompoundTag();
+    public static NBTTagCompound getTag(net.minecraft.world.item.ItemStack stack){
+        if (stack.u() == null){
+            return new NBTTagCompound();
         }else{
-            return stack.getTag();
+            return stack.u();
         }
     }
 
@@ -182,10 +179,10 @@ public class Item {
 
         net.minecraft.world.item.ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
 
-        CompoundTag tagCompound = getTag(nmsItemStack);
+        NBTTagCompound tagCompound = getTag(nmsItemStack);
         if (tagCompound != null){
-            if (tagCompound.getString(key) != null){
-                return tagCompound.getInt(key);
+            if (tagCompound.l(key) != null){
+                return tagCompound.h(key);
             }
         }
         return 0;
@@ -193,21 +190,21 @@ public class Item {
 
     public static double getDoubleTag(ItemStack itemStack,String key){
         net.minecraft.world.item.ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
-        CompoundTag tagCompound = getTag(nmsItemStack);
+        NBTTagCompound tagCompound = getTag(nmsItemStack);
         if (tagCompound != null){
-            if (tagCompound.getString(key) != null){
-                return tagCompound.getDouble(key);
+            if (tagCompound.l(key) != null){
+                return tagCompound.k(key);
             }
         }
         return 0;
     }
 
-    public static Tag getTag(ItemStack itemStack,String key){
+    public static NBTTagCompound getTag(ItemStack itemStack,String key){
         net.minecraft.world.item.ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
-        CompoundTag tagCompound = getTag(nmsItemStack);
+        NBTTagCompound tagCompound = getTag(nmsItemStack);
         if (tagCompound != null){
-            if (tagCompound.getString(key) != null){
-                return tagCompound.get(key);
+            if (tagCompound.l(key) != null){
+                return tagCompound.p(key);
             }
         }
         return null;

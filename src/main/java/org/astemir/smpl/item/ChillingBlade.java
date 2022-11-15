@@ -24,7 +24,7 @@ public class ChillingBlade extends ItemCustomSword{
             for (int i = 0;i<10;i++) {
                 world.spawnParticle(Particle.SNOWBALL, e.getEntity().getLocation().getX()+ RandomUtils.randomFloat(-0.5f,0.5f), e.getEntity().getLocation().getY()+ 1f+RandomUtils.randomFloat(-0.5f,0.5f), e.getEntity().getLocation().getZ()+ RandomUtils.randomFloat(-0.5f,0.5f), 0, 0, 0, 0);
             }
-            ((LivingEntity)e.getEntity()).addPotionEffect(new PotionEffect(PotionEffectType.SLOW,100,0));
+            ((LivingEntity)e.getEntity()).addPotionEffect(new PotionEffect(PotionEffectType.SLOW,160,0));
         }
         return super.onAttackEntity(e);
     }

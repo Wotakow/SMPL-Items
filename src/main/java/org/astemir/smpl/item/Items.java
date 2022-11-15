@@ -30,6 +30,10 @@ public class Items {
     public static final Item SACRIFICE_SWORD = registerItem(SacrificeSword.class,"sacrifice_sword", ItemModels.SACRIFICE_SWORD);
     public static final Item HEFTY_PICKAXE = registerItem(HeftyPickaxe.class,"hefty_pickaxe", ItemModels.HEFTY_PICKAXE);
     public static final Item FIRESTORM = registerItem(Firestorm.class,"firestorm", ItemModels.FIRESTORM);
+    public static final Item VOLTAIC_TRIDENT = registerItem(VoltaicTrident.class,"voltaic_trident", ItemModels.VOLTAIC_TRIDENT);
+    public static final Item TRAILBLAZER = registerItem(Trailblazer.class,"trailblazer", ItemModels.TRAILBLAZER);
+    public static final Item INFERNAL_WING = registerItem(InfernalWing.class,"infernal_wing", ItemModels.INFERNAL_WING);
+    public static final Item UNSTABLE_POWDER = registerItem(UnstablePowder.class,"unstable_powder", ItemModels.UNSTABLE_POWDER);
 
 
     public static Item registerItem(Class<? extends Item> itemClass, String key, ItemModel texture){

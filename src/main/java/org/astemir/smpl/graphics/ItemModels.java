@@ -11,6 +11,7 @@ public class ItemModels {
     public static final ItemModel CHILLING_BLADE = new ItemModel(Material.DIAMOND_SWORD,1450003);
     public static final ItemModel SACRIFICE_SWORD = new ItemModel(Material.NETHERITE_SWORD,1450004);
     public static final ItemModel VAMPIRE = new ItemModel(Material.NETHERITE_SWORD,1450005);
+    public static final ItemModel VOLTAIC_TRIDENT = new ItemModel(Material.TRIDENT,1450006);
     public static final ItemModel HOLY_WRATH = new ItemModel(Material.CROSSBOW,1450100);
     public static final ItemModel FIRESTORM = new ItemModel(Material.CROSSBOW,1450101);
     public static final ItemModel MULTIPLEX_CROSSBOW = new ItemModel(Material.CROSSBOW,1450102);
@@ -24,7 +25,6 @@ public class ItemModels {
     public static final ItemModel RADIATION_SHIELD = new ItemModel(Material.SHIELD,1450302);
     public static final ItemModel UNSTABLE_POWDER = new ItemModel(Material.GLOWSTONE_DUST,1450401);
     public static final ItemModel HEFTY_PICKAXE = new ItemModel(Material.DIAMOND_PICKAXE,1450500);
-
 
 
 }
